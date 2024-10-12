@@ -3,7 +3,11 @@ window.customElements.define('b2sb-toolbar', class extends HTMLElement {
 
     connectedCallback() {
         this.innerHTML = `
-            
+            <a href="index.html">Logo</a>
+            <div style="flex-grow: 1;"></div>
+            <a href="">Lorem</a>
+            <a href="">Lorem</a>
+            <a href="">Lorem</a>
         `;
     }
 });

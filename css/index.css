@@ -1,8 +1,9 @@
 :root {
     --color-1: #04385D;
-    --color-2: #FBF6E0;
+    --color-2: #fbf9f2;
     --color-3: #DFC265;
-    --color-4: #CCC6B8;
+    --color-4: #eeecea;
+    --padding: 10px;
 }
 
 * {
@@ -11,18 +12,44 @@
     font-family: "Rubik", sans-serif;
 }
 
+::-webkit-scrollbar {
+    width: var(--padding);
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-4);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-3);
+}
+
 b2sb-toolbar {
     display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--padding);
     position: sticky;
     top: 0px;
     width: 100%;
     min-height: 70px;
+    padding: var(--padding);
     z-index: 10;
     background-color: var(--color-1);
 }
 
+b2sb-toolbar>a {
+    font-size: larger;
+    color: var(--color-2);
+    text-decoration: none;
+    min-width: 70px;
+    text-align: center;
+}
+
 .large-section,
-.section {
+.section,
+.small-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
@@ -30,19 +57,25 @@ b2sb-toolbar {
     font-size: x-large;
 }
 
-.section {
+.small-section {
     height: 600px;
 }
 
-.large-section {
+.section {
     height: 800px;
 }
 
+.large-section {
+    height: 1000px;
+}
+
+.sections>.small-section,
 .sections>.section,
 .sections>.large-section {
     background-color: var(--color-4);
 }
 
+.sections>.small-section:nth-child(odd),
 .sections>.section:nth-child(odd),
 .sections>.large-section:nth-child(odd) {
     background-color: var(--color-2);
@@ -66,21 +99,21 @@ b2sb-footer {
     align-items: center;
     min-width: 20vw;
     min-height: 50px;
-    padding: 10px;
+    padding: var(--padding);
     text-decoration: none;
     color: var(--color-3);
     background-color: transparent;
     border: 3px solid var(--color-3);
-    border-radius: 10px;
+    border-radius: var(--padding);
     mix-blend-mode: multiply;
     transition: background-color 0.15s ease, color 0.15s ease, transform 0.2s ease-out;
 }
 
-.sections>.section:nth-child(even) .button,
+/* .sections>.section:nth-child(even) .button,
 .sections>.large-section:nth-child(even) .button {
     color: var(--color-1);
     border-color: var(--color-1);
-}
+} */
 
 .button:hover {
     color: white;
@@ -88,11 +121,11 @@ b2sb-footer {
     transform: scale(1.1, 1.1);
 }
 
-.sections>.section:nth-child(even) .button:hover,
+/* .sections>.section:nth-child(even) .button:hover,
 .sections>.large-section:nth-child(even) .button:hover {
     color: white;
     background-color: var(--color-1);
-}
+} */
 
 .button-text-list {
     width: 100%;
