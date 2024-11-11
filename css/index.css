@@ -21,6 +21,10 @@
 }
 
 ::-webkit-scrollbar-thumb {
+    background: var(--color-1);
+}
+
+::-webkit-scrollbar-thumb:hover {
     background: var(--color-3);
 }
 
@@ -29,22 +33,41 @@ b2sb-toolbar {
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
-    gap: var(--padding);
     position: sticky;
     top: 0px;
     width: 100%;
     min-height: 70px;
-    padding: var(--padding);
     z-index: 10;
     background-color: var(--color-1);
 }
 
+.toolbar-button,
 b2sb-toolbar>a {
     font-size: larger;
     color: var(--color-2);
+    display: flex;
     text-decoration: none;
+    padding: var(--padding);
     min-width: 70px;
+    min-height: 70px;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.toolbar-button:hover {
+    color: var(--color-1);
+    background-color: var(--color-3);
+}
+
+.section-span {
+    grid-column: 1 / -1;
+    padding: 15vw;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 5vh;
+    align-content: center;
 }
 
 .large-section,
@@ -102,10 +125,9 @@ b2sb-footer {
     padding: var(--padding);
     text-decoration: none;
     color: var(--color-3);
-    background-color: transparent;
+    background-color: var(--color-2);
     border: 3px solid var(--color-3);
     border-radius: var(--padding);
-    mix-blend-mode: multiply;
     transition: background-color 0.15s ease, color 0.15s ease, transform 0.2s ease-out;
 }
 
@@ -116,7 +138,7 @@ b2sb-footer {
 } */
 
 .button:hover {
-    color: white;
+    color: var(--color-2);
     background-color: var(--color-3);
     transform: scale(1.1, 1.1);
 }
@@ -131,8 +153,18 @@ b2sb-footer {
     width: 100%;
     display: flex;
     flex-flow: column nowrap;
+    gap: 5vh;
     justify-content: center;
     align-items: center;
-    gap: 5vh;
     padding: 5vw;
+}
+
+.slider {
+    width: 100%;
+}
+
+.slider-labels {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
 }
