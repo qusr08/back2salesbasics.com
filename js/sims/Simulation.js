@@ -1,12 +1,21 @@
 export class Simulation {
     constructor(element) {
         this.element = element;
+        this.initialized = false;
+    }
 
+    onResize(e) {
+        this.render.options.width = this.element.offsetWidth;
+        this.render.options.height = this.element.offsetHeight;
+        this.render.canvas.width = this.element.offsetWidth;
+        this.render.canvas.height = this.element.offsetHeight;
+    }
+
+    init() {
         // Create the matter.js engine
         this.engine = Matter.Engine.create();
 
         // Create the matter.js renderer
-        console.log(this.element.offsetWidth);
         this.render = Matter.Render.create({
             options: {
                 width: this.element.offsetWidth,
@@ -24,17 +33,8 @@ export class Simulation {
         Matter.Runner.run(this.runner, this.engine);
 
         // Add an event to matter.js so the simulation can be updated
-        Matter.Events.on(this.engine, 'afterUpdate', this.update);
+        Matter.Events.on(this.engine, 'afterUpdate', (e) => { this.update(); });
     }
 
-    onResize(e) {
-        this.render.options.width = this.element.offsetWidth;
-        this.render.options.height = this.element.offsetHeight;
-        this.render.canvas.width = this.element.offsetWidth;
-        this.render.canvas.height = this.element.offsetHeight;
-    }
-
-    init() { }
-
-    update(e) { }
+    update() { }
 }
