@@ -12,6 +12,18 @@
     font-family: "Rubik", sans-serif;
 }
 
+.matter-wrapper {
+    position: relative;
+}
+
+.matter-wrapper>canvas {
+    position: absolute;
+    /* https://stackoverflow.com/questions/11802788/get-rid-of-padding-margin-around-canvas-element */
+    display: block;
+}
+
+/* #region Scrollbar */
+
 ::-webkit-scrollbar {
     width: var(--padding);
 }
@@ -27,6 +39,10 @@
 ::-webkit-scrollbar-thumb:hover {
     background: var(--color-3);
 }
+
+/* #endregion */
+
+/* #region Toolbar */
 
 b2sb-toolbar {
     display: flex;
@@ -61,6 +77,10 @@ b2sb-toolbar>a {
     background-color: var(--color-3);
 }
 
+/* #endregion */
+
+/* #region Sections */
+
 .section-span {
     grid-column: 1 / -1;
     padding: 15vw;
@@ -78,6 +98,7 @@ b2sb-toolbar>a {
     grid-template-rows: 1fr;
     text-align: center;
     font-size: x-large;
+    background-color: var(--color-4);
 }
 
 .small-section {
@@ -92,17 +113,13 @@ b2sb-toolbar>a {
     height: 1000px;
 }
 
-.sections>.small-section,
-.sections>.section,
-.sections>.large-section {
-    background-color: var(--color-4);
-}
-
 .sections>.small-section:nth-child(odd),
 .sections>.section:nth-child(odd),
 .sections>.large-section:nth-child(odd) {
     background-color: var(--color-2);
 }
+
+/* #endregion */
 
 b2sb-footer {
     display: flex;
@@ -114,6 +131,8 @@ b2sb-footer {
     text-align: center;
     color: var(--color-2);
 }
+
+/* #region Button */
 
 .button {
     display: flex;
@@ -131,23 +150,13 @@ b2sb-footer {
     transition: background-color 0.15s ease, color 0.15s ease, transform 0.2s ease-out;
 }
 
-/* .sections>.section:nth-child(even) .button,
-.sections>.large-section:nth-child(even) .button {
-    color: var(--color-1);
-    border-color: var(--color-1);
-} */
-
 .button:hover {
     color: var(--color-2);
     background-color: var(--color-3);
     transform: scale(1.1, 1.1);
 }
 
-/* .sections>.section:nth-child(even) .button:hover,
-.sections>.large-section:nth-child(even) .button:hover {
-    color: white;
-    background-color: var(--color-1);
-} */
+/* #endregion */
 
 .button-text-list {
     width: 100%;
