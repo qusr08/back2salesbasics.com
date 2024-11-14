@@ -4,7 +4,7 @@ export class Simulation {
         this.initialized = false;
     }
 
-    onResize(e) {
+    onResize() {
         this.render.options.width = this.element.offsetWidth;
         this.render.options.height = this.element.offsetHeight;
         this.render.canvas.width = this.element.offsetWidth;
@@ -27,6 +27,12 @@ export class Simulation {
             engine: this.engine
         });
         Matter.Render.run(this.render);
+
+        // Make sure the canvas html element is the first child in the list
+        // this.render.canvas.parentNode.insertBefore(this.render.canvas, this.render.canvas.parentNode.firstChild);
+
+        // Make the element have a transparent background
+        this.element.style.backgroundColor = "transparent";
 
         // Create the matter.js runner
         this.runner = Matter.Runner.create();

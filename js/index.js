@@ -12,4 +12,4 @@ window.onload = (e) => {
     });
 }
 
-window.onresize = (e) => simulations.forEach(simulation => simulation.onResize(e));
+window.onresize = (e) => simulations.forEach(simulation => simulation.onResize());

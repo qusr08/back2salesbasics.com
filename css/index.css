@@ -20,6 +20,7 @@
     position: absolute;
     /* https://stackoverflow.com/questions/11802788/get-rid-of-padding-margin-around-canvas-element */
     display: block;
+    z-index: -10;
 }
 
 /* #region Scrollbar */
