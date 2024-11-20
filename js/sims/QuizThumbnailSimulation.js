@@ -1,31 +1,35 @@
 import { Simulation } from "./Simulation.js";
 import { randFloat } from "../utils.js";
 
+const COIN_SPAWN_INTERVAL = 900; // Milliseconds
+const COIN_SPAWN_VEL = 0.05;
+const COIN_BOUNCINESS = 0.45;
+const COIN_FRICTION = 0.001;
+const COIN_RADIUS = 30;
+const MAX_COINS = 20;
+const COIN_SCALE_SPEED = 0.005;
+const WALL_THICKNESS = 20;
+
 export class QuizThumbnailSimulation extends Simulation {
     constructor(wrapper) {
         super(wrapper);
 
         // Declare coin variables
-        this.coinRadius = 30;
         this.coins = [];
         this.removedCoins = [];
-        this.maxCoins = 20;
         this.lastCoinSpawnTime = -1;
-        this.coinSpawnInterval = 900; // Milliseconds
-        this.coinSpawnVelocity = 0.05;
         this.coinOptions = {
-            restitution: 0.45,
+            restitution: COIN_BOUNCINESS,
+            friction: COIN_FRICTION,
             render: {
                 sprite: {
                     texture: "../../png/coin.png",
-                    xScale: this.coinRadius * 2 / 500, // The coin image is 500 pixels big
-                    yScale: this.coinRadius * 2 / 500
+                    xScale: COIN_RADIUS * 2 / 500, // The coin image is 500 pixels big
+                    yScale: COIN_RADIUS * 2 / 500
                 }
             }
         };
-        this.removedCoinScaleSpeed = 0.01;
 
-        this.wallThickness = 20;
         this.wallOptions = {
             isStatic: true,
             render: {
@@ -63,14 +67,14 @@ export class QuizThumbnailSimulation extends Simulation {
 
         // Spawn a new coin if it is time to do so
         let now = Date.now();
-        if (now - this.lastCoinSpawnTime >= this.coinSpawnInterval) {
+        if (now - this.lastCoinSpawnTime >= COIN_SPAWN_INTERVAL) {
             this.createCoin();
             this.lastCoinSpawnTime = now;
         }
 
         // Update the size of all coins that have been removed
         for (let i = this.removedCoins.length - 1; i >= 0; i--) {
-            this.removedCoins[i].scale -= this.removedCoinScaleSpeed;
+            this.removedCoins[i].scale -= COIN_SCALE_SPEED;
             this.removedCoins[i].body.render.sprite.xScale = this.removedCoins[i].scale;
             this.removedCoins[i].body.render.sprite.yScale = this.removedCoins[i].scale;
 
@@ -83,9 +87,9 @@ export class QuizThumbnailSimulation extends Simulation {
 
     createWalls() {
         // Create boundary walls
-        this.ground = Matter.Bodies.rectangle(this.element.offsetWidth / 2, this.element.offsetHeight + (this.wallThickness / 2), this.element.offsetWidth, this.wallThickness, this.wallOptions);
-        this.leftWall = Matter.Bodies.rectangle(-this.wallThickness / 2, this.element.offsetHeight / 2, this.wallThickness, this.element.offsetHeight, this.wallOptions);
-        this.rightWall = Matter.Bodies.rectangle(this.element.offsetWidth + (this.wallThickness / 2), this.element.offsetHeight / 2, this.wallThickness, this.element.offsetHeight, this.wallOptions);
+        this.ground = Matter.Bodies.rectangle(this.element.offsetWidth / 2, this.element.offsetHeight + (WALL_THICKNESS / 2), this.element.offsetWidth, WALL_THICKNESS, this.wallOptions);
+        this.leftWall = Matter.Bodies.rectangle(-WALL_THICKNESS / 2, this.element.offsetHeight / 2, WALL_THICKNESS, this.element.offsetHeight, this.wallOptions);
+        this.rightWall = Matter.Bodies.rectangle(this.element.offsetWidth + (WALL_THICKNESS / 2), this.element.offsetHeight / 2, WALL_THICKNESS, this.element.offsetHeight, this.wallOptions);
 
         // Create boundaries around the edges of the screen (excluding the top)
         Matter.Composite.add(this.engine.world, [this.ground, this.leftWall, this.rightWall]);
@@ -93,16 +97,16 @@ export class QuizThumbnailSimulation extends Simulation {
 
     createCoin() {
         // Create a coin object
-        let coin = Matter.Bodies.circle(randFloat(this.coinRadius, this.element.offsetWidth / 2 - this.coinRadius), -this.coinRadius, this.coinRadius, this.coinOptions);
+        let coin = Matter.Bodies.circle(randFloat(COIN_RADIUS, this.element.offsetWidth / 2 - COIN_RADIUS), -COIN_RADIUS, COIN_RADIUS, this.coinOptions);
 
         Matter.Body.rotate(coin, randFloat(0, 360));
-        Matter.Body.applyForce(coin, coin.position, { x: randFloat(-this.coinSpawnVelocity, this.coinSpawnVelocity), y: 0 });
+        Matter.Body.applyForce(coin, coin.position, { x: randFloat(-COIN_SPAWN_VEL, COIN_SPAWN_VEL), y: 0 });
 
         // Add the coin object to the world
         Matter.Composite.add(this.engine.world, coin);
 
         // If the max coin amount has been reached, remove the oldest coin
-        if (this.coins.length == this.maxCoins) {
+        if (this.coins.length == MAX_COINS) {
             this.removedCoins.push({ body: this.coins[0], scale: this.coins[0].render.sprite.xScale });
             this.coins.splice(0, 1);
         }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,15 +10,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 
-    <script src="js/index.js"></script>
+    <script src="https://brm.io/matter-js/build/matter.min.js"></script>
+    <script type="module" src="js/index.js"></script>
     <script src="js/elements.js"></script>
 
     <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
+
 <body>
-    <b2sb-toolbar></b2sb-toolbar><div class="sections">
-        <div class="large-section">
-            <div class="section-span">
+    <b2sb-toolbar></b2sb-toolbar>
+    <div class="sections">
+        <div class="vert-section">
+            <div>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga ducimus voluptates accusamus fugit adipisci laboriosam ea unde aspernatur dolorem eveniet?</p>
                 <div class="slider-labels">
                     <p>Lorem, ipsum.</p>
@@ -26,7 +30,19 @@
                 <input type="range" min="1" max="10" value="5" class="slider">
             </div>
         </div>
+        <div class="small-vert-section matter-wrapper" matter-index="1">
+            <!-- <div class="quiz-result">
+                <img class="range" src="png/range.png">
+                <img class="arrow" src="png/rangeArrow.png">
+            </div> -->
+            <div></div>
+            <div class="quiz-result">
+                <h3></h3>
+                <p></p>
+            </div>
+        </div>
     </div>
     <b2sb-footer></b2sb-footer>
 </body>
+
 </html>
