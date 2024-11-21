@@ -40,7 +40,7 @@ export class QuizResultSimulation extends Simulation {
             isStatic: true,
             render: {
                 sprite: {
-                    texture: "png/range4Weight.png",
+                    texture: "./png/range4Weight.png",
                     xScale: RANGE_WIDTH / 1500, // The range image is 1500x750
                     yScale: RANGE_HEIGHT / 750
                 }
@@ -52,7 +52,7 @@ export class QuizResultSimulation extends Simulation {
             isStatic: true,
             render: {
                 sprite: {
-                    texture: "png/rangeArrow.png",
+                    texture: "./png/rangeArrow.png",
                     xScale: ARROW_WIDTH / 150, // The arrow image is 150x750
                     yScale: ARROW_HEIGHT / 750,
                     yOffset: 0.4 // This is equal to => 0.5 - (150 / 2 / 750)

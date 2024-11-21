@@ -23,7 +23,7 @@ export class QuizThumbnailSimulation extends Simulation {
             friction: COIN_FRICTION,
             render: {
                 sprite: {
-                    texture: "png/coin.png",
+                    texture: "./png/coin.png",
                     xScale: COIN_RADIUS * 2 / 500, // The coin image is 500 pixels big
                     yScale: COIN_RADIUS * 2 / 500
                 }
